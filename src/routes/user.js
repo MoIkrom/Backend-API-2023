@@ -3,10 +3,10 @@ const express = require("express");
 
 const Router = express.Router();
 
-Router.get("/i", (request, response) => {
+Router.get("/user", (request, response) => {
   response.status(200).send("es oang oyy");
 });
-Router.post("/i", (request, response) => {
+Router.post("/user", (request, response) => {
   response.status(200).send("es oang oyy");
 });
 
