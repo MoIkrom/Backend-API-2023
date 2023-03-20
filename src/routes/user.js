@@ -3,7 +3,7 @@ const express = require("express");
 
 const Router = express.Router();
 
-Router.get("/user", (request, response) => {
+Router.get("/profile", (request, response) => {
   response.status(200).send("es oang oyy");
 });
 Router.post("/user", (request, response) => {
