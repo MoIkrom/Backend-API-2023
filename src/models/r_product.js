@@ -42,4 +42,34 @@ module.exports = {
           }
         });
     }),
+  updateProduct: (id, data) =>
+    new Promise((resolve, reject) => {
+      supabase
+        .from("product")
+        .update(data)
+        .select()
+        .eq("id", id)
+        .then((result) => {
+          if (!result.error) {
+            resolve(result);
+          } else {
+            reject(result);
+          }
+        });
+    }),
+  deleteProduct: (id) =>
+    new Promise((resolve, reject) => {
+      supabase
+        .from("product")
+        .delete()
+        .select()
+        .eq("id", id)
+        .then((result) => {
+          if (!result.error) {
+            resolve(result);
+          } else {
+            reject(result);
+          }
+        });
+    }),
 };
