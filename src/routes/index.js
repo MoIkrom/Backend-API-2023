@@ -9,11 +9,13 @@ const Router = express.Router();
 
 // Declare Variable & Call Router
 const userRoutes = require("./user");
+const productRoutes = require("./rt_product");
 
 // Declare Variable
 const prefix = "/api/v1";
 
 // Use router file as af callback
 Router.use(`${prefix}/user`, userRoutes);
+Router.use(`${prefix}/product`, productRoutes);
 
 module.exports = Router;
