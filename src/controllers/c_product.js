@@ -2,15 +2,22 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 /* eslint-disable consistent-return */
-const { getAllProduct, getProductbyId, createProduct, updateProduct, deleteProduct } = require("../models/r_product");
+const { getAllProduct, getProductbyId, createProduct, updateProduct, deleteProduct, getCountProduct } = require("../models/r_product");
 const wrapper = require("../utils/wrapper");
 
 module.exports = {
   getAllProduct: async (request, response) => {
     try {
-      const result = await getAllProduct();
+      let { page, limit } = request.query;
+      page = +page;
+      limit = +limit;
+      const totalData = await getCountProduct();
+      const totalPage = Math.ceil(totalData / limit);
+      const pagination = { page, totalPage, limit, totalData };
+      const offset = page * limit - limit;
 
-      wrapper.response(response, result.status, "Success Get Data !", result.data);
+      const result = await getAllProduct(offset, limit);
+      return wrapper.response(response, result.status, "Success Get Data !", result.data, pagination);
     } catch (error) {
       const { status = 500, statusText = "Internal Server Error", error: errorData = null } = error;
       return wrapper.response(response, status, statusText, errorData);
@@ -36,7 +43,7 @@ module.exports = {
       const setData = { nama_Barang, harga, stock };
       const result = await createProduct(setData);
 
-      wrapper.response(response, result.status, "Success Create Product !", result.data);
+      return wrapper.response(response, result.status, "Success Create Product !", result.data);
     } catch (error) {
       const { status = 500, statusText = "Internal Server Error", error: errorData = null } = error;
       return wrapper.response(response, status, statusText, errorData);

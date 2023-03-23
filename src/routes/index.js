@@ -8,7 +8,7 @@ const express = require("express");
 const Router = express.Router();
 
 // Declare Variable & Call Router
-const userRoutes = require("./user");
+const userRoutes = require("./rt_user");
 const productRoutes = require("./rt_product");
 
 // Declare Variable
