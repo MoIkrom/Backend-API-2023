@@ -1,23 +1,26 @@
 const supabase = require("../config/supabase");
 
 module.exports = {
-  // Ini Contoh Syntax
-  //  =================================
-  // getCountProduct: () => new Promise ((resolve , reject) => {}.then((result) => {
-  //   if (!result.error) {
-  //     resolve(result.count);
-  //   } else {
-  //     reject(result);
-  //   }
-  // });)
-  // =================================
-
   Register: (data) =>
     new Promise((resolve, reject) => {
       supabase
         .from("user")
         .insert([data])
-        .select()
+        .select("id, email, username")
+        .then((result) => {
+          if (!result.error) {
+            resolve(result);
+          } else {
+            reject(result);
+          }
+        });
+    }),
+
+  EditPassword: (id) =>
+    new Promise((resolve, reject) => {
+      supabase
+        .from("user")
+        .eq("id", id)
         .then((result) => {
           if (!result.error) {
             resolve(result);
@@ -117,4 +120,32 @@ module.exports = {
           }
         });
     }),
+
+  //   const deleteWhitelistToken = (token) => {
+  //     return new Promise((resolve, reject) => {
+  //       const query = "delete from whitelist_token where token = $1";
+  //       postgreDb.query(query, [token], (error, result) => {
+  //         if (error) {
+  //           console.log(query);
+  //           console.log(error);
+  //           return reject(error);
+  //         }
+  //         console.log(query);
+  //         resolve(result);
+  //       });
+  //     });
+  //   };
+
+  //   const checkWhitelistToken = (token) => {
+  //     return new Promise((resolve, reject) => {
+  //       const query = "select * from whitelist_token where token = $1";
+  //       postgreDb.query(query, [token], (error, result) => {
+  //         if (error) {
+  //           console.log(error);
+  //           return reject(error);
+  //         }
+  //         resolve(result);
+  //       });
+  //     });
+  //   };
 };

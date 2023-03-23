@@ -49,6 +49,7 @@ module.exports = {
       supabase
         .from("product")
         .insert([data])
+        .select()
         .then((result) => {
           if (!result.error) {
             resolve(result);

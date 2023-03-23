@@ -1,4 +1,4 @@
-const { Register, getUserbyId, getAllUser, getCountUser, EditUser, deleteUser, getUserByEmail } = require("../models/r_user");
+const { Register, getUserbyId, getAllUser, getCountUser, EditUser, deleteUser, getUserByEmail, EditPassword, insertToken } = require("../models/r_user");
 const wrapper = require("../utils/wrapper");
 const bcrypt = require("bcrypt");
 
@@ -41,8 +41,19 @@ module.exports = {
         }
 
         const result = await Register(setUser);
-        return wrapper.response(response, result.status, " Register Success ");
+        return wrapper.response(response, result.status, " Register Success ", result.data);
       });
+    } catch (error) {
+      console.log(error);
+      const { status = 500, statusText = "Internal Server Error", error: errorData = null } = error;
+      return wrapper.response(response, status, statusText, errorData);
+    }
+  },
+  EditPassword: async (request, response) => {
+    try {
+      //   const getId = await getUserbyId(id);
+
+      return wrapper.response(response, result.status, "Success Edit Password ");
     } catch (error) {
       console.log(error);
       const { status = 500, statusText = "Internal Server Error", error: errorData = null } = error;

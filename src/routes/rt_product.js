@@ -2,13 +2,12 @@
 const express = require("express");
 
 const Router = express.Router();
-
-// eslint-disable-next-line prettier/prettier
 const { getAllProduct, getProductbyId, createProduct, updateProduct, deleteProduct } = require("../controllers/c_product");
+const { authentication } = require("../middleware/isLogin");
 
 Router.get("/", getAllProduct);
 Router.get("/:id", getProductbyId);
-Router.post("/", createProduct);
+Router.post("/", authentication, createProduct);
 Router.patch("/:id", updateProduct);
 Router.delete("/:id", deleteProduct);
 

@@ -1,6 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 
+require("dotenv").config();
+
 //  Import Requirments
 const express = require("express");
 const cors = require("cors");
