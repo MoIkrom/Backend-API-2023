@@ -1,7 +1,4 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable no-unused-vars */
-/* eslint-disable camelcase */
-/* eslint-disable consistent-return */
 const { getAllProduct, getProductbyId, createProduct, updateProduct, deleteProduct, getCountProduct } = require("../models/r_product");
 const wrapper = require("../utils/wrapper");
 
