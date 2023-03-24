@@ -4,7 +4,8 @@
 // const redisHost = process.env.REDIS_HOST;
 // const redistPort = process.env.REDIS_PORT;
 
-// redis-cli -u redis://default:qZvc3raEcIqZRHrS5JPuAPPD0IFLZS9D@redis-13204.c100.us-east-1-4.ec2.cloud.redislabs.com:13204
+// // REMOTE REDIS
+// // rdcli -h ${redisHost} -a ${redisPassword} -p ${redistPort}
 // const client = redis.createClient({
 //   socket: {
 //     host: redisHost,

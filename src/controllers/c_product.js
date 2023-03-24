@@ -5,7 +5,7 @@ const wrapper = require("../utils/wrapper");
 module.exports = {
   getAllProduct: async (request, response) => {
     try {
-      let { page, limit } = request.query;
+      let { page, limit, sort } = request.query;
       page = +page;
       limit = +limit;
       const totalData = await getCountProduct();
@@ -13,9 +13,23 @@ module.exports = {
       const pagination = { page, totalPage, limit, totalData };
       const offset = page * limit - limit;
 
-      const result = await getAllProduct(offset, limit);
+      let sortColumn = "dateTimeShow";
+      let sortType = "asc";
+
+      if (sort) {
+        sortColumn = sort.split(" ")[0];
+        sortType = sort.split(" ")[1];
+      }
+
+      if (sortType.toLowerCase() === "asc") {
+        sortType = true;
+      } else {
+        sortType = false;
+      }
+      const result = await getAllProduct(offset, limit, sortColumn, sortType);
       return wrapper.response(response, result.status, "Success Get Data !", result.data, pagination);
     } catch (error) {
+      console.log(error);
       const { status = 500, statusText = "Internal Server Error", error: errorData = null } = error;
       return wrapper.response(response, status, statusText, errorData);
     }

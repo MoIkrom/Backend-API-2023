@@ -16,12 +16,13 @@ module.exports = {
         });
     }),
 
-  getAllProduct: (offset, limit) =>
+  getAllProduct: (offset, limit, sortColumn, sortType) =>
     new Promise((resolve, reject) => {
       supabase
         .from("product")
         .select("*")
         .range(offset, offset + limit - 1)
+        // .sort(sortColumn, { ascending: sortType })
         .then((result) => {
           if (!result.error) {
             resolve(result);
