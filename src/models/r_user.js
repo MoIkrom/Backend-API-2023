@@ -30,6 +30,20 @@ module.exports = {
         });
     }),
 
+  getProfile: (token) =>
+    new Promise((resolve, reject) => {
+      supabase
+        .from("user")
+        .select("id, username, email")
+        .eq("id", token)
+        .then((result) => {
+          if (!result.error) {
+            resolve(result);
+          } else {
+            reject(result);
+          }
+        });
+    }),
   getUserbyId: (id) =>
     new Promise((resolve, reject) => {
       supabase
