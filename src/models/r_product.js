@@ -16,13 +16,14 @@ module.exports = {
         });
     }),
 
-  getAllProduct: (offset, limit, sortColumn, sortType) =>
+  getAllProduct: (offset, limit) =>
     new Promise((resolve, reject) => {
       supabase
         .from("product")
         .select("*")
         .range(offset, offset + limit - 1)
         // .sort(sortColumn, { ascending: sortType })
+        .order("created_at", { ascending: false })
         .then((result) => {
           if (!result.error) {
             resolve(result);
