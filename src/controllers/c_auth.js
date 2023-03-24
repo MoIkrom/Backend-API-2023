@@ -32,17 +32,20 @@ module.exports = {
 
       const payload = {
         user_id: checkEmail.data[0].id,
-        username: checkEmail.data[0].username,
-        email: checkEmail.data[0].email,
       };
       const token = jwt.sign(payload, process.env.SECRET_KEY, {
         expiresIn: "1d",
         issuer: process.env.ISSUER,
       });
+      const refreshToken = jwt.sign(payload, process.env.SECRET_KEY_REFRESH, {
+        expiresIn: "3d",
+        issuer: process.env.ISSUER,
+      });
 
       const result = {
-        token,
         payload,
+        token,
+        refreshToken,
       };
 
       new Promise((resolve, reject) => {
@@ -73,6 +76,44 @@ module.exports = {
       await logout(token);
 
       return wrapper.response(response, 200, "Logout Success!");
+    } catch (error) {
+      console.log(error);
+      const { status = 500, statusText = "Internal Server Error", error: errorData = null } = error;
+      return wrapper.response(response, status, statusText, errorData);
+    }
+  },
+  refresh: async (request, response) => {
+    try {
+      const { refreshToken } = request.body;
+
+      if (!refreshToken) {
+        return wrapper.response(response, 400, "Refresh Token Cannot be Empty !");
+      }
+
+      let payload, token, newRefreshToken;
+      jwt.verify(refreshToken, process.env.SECRET_KEY_REFRESH, (err, res) => {
+        if (err) {
+          return wrapper.response(response, 400, "Refresh Token Cannot be Empty !");
+        }
+        payload = {
+          user_id: res.user_id,
+        };
+
+        token = jwt.sign(payload, process.env.SECRET_KEY, {
+          expiresIn: "1d",
+          issuer: process.env.ISSUER,
+        });
+
+        newRefreshToken = jwt.sign(payload, process.env.SECRET_KEY_REFRESH, {
+          expiresIn: "3d",
+          issuer: process.env.ISSUER,
+        });
+      });
+      return wrapper.response(response, 200, "Success Refresh Token!", {
+        user_id: payload.user_id,
+        token: token,
+        refreshToken: newRefreshToken,
+      });
     } catch (error) {
       console.log(error);
       const { status = 500, statusText = "Internal Server Error", error: errorData = null } = error;

@@ -8,7 +8,7 @@ const { authentication } = require("../middleware/isLogin");
 Router.get("/", getAllProduct);
 Router.get("/:id", getProductbyId);
 Router.post("/", authentication, createProduct);
-Router.patch("/:id", updateProduct);
-Router.delete("/:id", deleteProduct);
+Router.patch("/:id", authentication, updateProduct);
+Router.delete("/:id", authentication, deleteProduct);
 
 module.exports = Router;

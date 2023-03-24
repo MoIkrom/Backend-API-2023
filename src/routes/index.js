@@ -11,6 +11,7 @@ const Router = express.Router();
 const userRoutes = require("./rt_user");
 const productRoutes = require("./rt_product");
 const authRoutes = require("./rt_auth");
+const supplierRoutes = require("./rt_supplier");
 
 // Declare Variable
 const prefix = "/api/v1";
@@ -19,5 +20,6 @@ const prefix = "/api/v1";
 Router.use(`${prefix}/user`, userRoutes);
 Router.use(`${prefix}/product`, productRoutes);
 Router.use(`${prefix}/auth`, authRoutes);
+Router.use(`${prefix}/supplier`, supplierRoutes);
 
 module.exports = Router;
