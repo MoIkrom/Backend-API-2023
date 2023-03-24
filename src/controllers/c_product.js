@@ -50,8 +50,8 @@ module.exports = {
   },
   createProduct: async (request, response) => {
     try {
-      const { nama_Barang, harga, stock } = request.body;
-      const setData = { nama_Barang, harga, stock };
+      const { nama_Barang, harga, stock, nama_supplier, alamat_supplier, telp_supplier } = request.body;
+      const setData = { nama_Barang, harga, stock, nama_supplier, alamat_supplier, telp_supplier };
       const result = await createProduct(setData);
 
       return wrapper.response(response, result.status, "Success Create Product !", result.data);

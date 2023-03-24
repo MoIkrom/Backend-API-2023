@@ -20,7 +20,7 @@ module.exports = {
     new Promise((resolve, reject) => {
       supabase
         .from("product")
-        .select("*")
+        .select(`*, supplier(*)`)
         .range(offset, offset + limit - 1)
         // .sort(sortColumn, { ascending: sortType })
         .order("created_at", { ascending: false })
