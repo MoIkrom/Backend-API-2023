@@ -6,7 +6,6 @@ module.exports = {
       supabase
         .from("supplier")
         .select("*", { count: "exact" })
-        .order("created_at", { ascending: false })
         .then((result) => {
           if (!result.error) {
             resolve(result.count);
@@ -21,6 +20,7 @@ module.exports = {
       supabase
         .from("supplier")
         .select("*")
+        .order("created_at", { ascending: false })
         .range(offset, offset + limit - 1)
         .then((result) => {
           if (!result.error) {
