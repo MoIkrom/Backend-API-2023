@@ -1,4 +1,4 @@
-const { Register, getUserbyId, getAllUser, getCountUser, EditUser, deleteUser, getUserByEmail, getProfile, EditPassword, insertToken } = require("../models/r_user");
+const { Register, getUserbyId, getAllUser, AllUser, getCountUser, EditUser, deleteUser, getUserByEmail, getProfile, EditPassword, insertToken } = require("../models/r_user");
 const wrapper = require("../utils/wrapper");
 const bcrypt = require("bcrypt");
 

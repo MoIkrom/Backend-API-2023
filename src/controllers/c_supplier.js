@@ -1,8 +1,18 @@
 /* eslint-disable prettier/prettier */
-const { getCountSupplier, getAllSupplier, getSupplierbyId, createSupplier, updateSupplier, deleteSupplier } = require("../models/r_supplier");
+const { getCountSupplier, getAllSupplier, AllSupplier, getSupplierbyId, createSupplier, updateSupplier, deleteSupplier } = require("../models/r_supplier");
 const wrapper = require("../utils/wrapper");
 
 module.exports = {
+  AllSupplier: async (request, response) => {
+    try {
+      const result = await AllSupplier();
+      return wrapper.response(response, result.status, "Success Get Data !", result.data);
+    } catch (error) {
+      console.log(error);
+      const { status = 500, statusText = "Internal Server Error", error: errorData = null } = error;
+      return wrapper.response(response, status, statusText, errorData);
+    }
+  },
   getAllSupplier: async (request, response) => {
     try {
       let { page, limit } = request.query;

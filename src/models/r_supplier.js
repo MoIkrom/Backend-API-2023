@@ -15,6 +15,20 @@ module.exports = {
         });
     }),
 
+  AllSupplier: () =>
+    new Promise((resolve, reject) => {
+      supabase
+        .from("supplier")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .then((result) => {
+          if (!result.error) {
+            resolve(result);
+          } else {
+            reject(result);
+          }
+        });
+    }),
   getAllSupplier: (offset, limit) =>
     new Promise((resolve, reject) => {
       supabase
