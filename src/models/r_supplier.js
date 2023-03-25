@@ -6,6 +6,7 @@ module.exports = {
       supabase
         .from("supplier")
         .select("*", { count: "exact" })
+        .order("created_at", { ascending: false })
         .then((result) => {
           if (!result.error) {
             resolve(result.count);
