@@ -134,32 +134,4 @@ module.exports = {
           }
         });
     }),
-
-  //   const deleteWhitelistToken = (token) => {
-  //     return new Promise((resolve, reject) => {
-  //       const query = "delete from whitelist_token where token = $1";
-  //       postgreDb.query(query, [token], (error, result) => {
-  //         if (error) {
-  //           console.log(query);
-  //           console.log(error);
-  //           return reject(error);
-  //         }
-  //         console.log(query);
-  //         resolve(result);
-  //       });
-  //     });
-  //   };
-
-  //   const checkWhitelistToken = (token) => {
-  //     return new Promise((resolve, reject) => {
-  //       const query = "select * from whitelist_token where token = $1";
-  //       postgreDb.query(query, [token], (error, result) => {
-  //         if (error) {
-  //           console.log(error);
-  //           return reject(error);
-  //         }
-  //         resolve(result);
-  //       });
-  //     });
-  //   };
 };
